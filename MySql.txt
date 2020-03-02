@@ -1,0 +1,490 @@
+1.数据库的基本概念
+	1. 概念
+        DataBase(DB)、数据仓库、软件、安装在操作系统之上、SQL、500万！
+
+	2. 作用
+		存储数据、管理数据
+
+	3. 数据库的特点: 
+		1. 持久化存储数据的。其实数据库就是一个文件系统
+		2. 方便存储和管理数据
+		3. 使用了统一的方式操作数据库 -- SQL
+
+---------------------------------------------------------------------------------------------------
+2.MySQL数据库软件
+	1. 安装
+		
+
+	2. 卸载
+		1. 去mysql的安装目录找到my.ini文件
+			复制 datadir="C:/ProgramData/MySQL/MySQL Server 5.5/Data/"
+		2. 卸载MySQL
+		3. 删除C:/ProgramData目录下的MySQL文件夹。
+		
+	3. 配置
+		MySQL服务启动
+			1. 手动。
+			2. cmd--> services.msc 打开服务的窗口
+			3. 使用管理员打开cmd
+				net start mysql : 启动mysql的服务
+				net stop mysql:关闭mysql服务
+		MySQL登录
+			1. mysql -uroot -p密码
+			2. mysql -hip -uroot -p连接目标的密码
+			3. mysql --host=ip --user=root --password=连接目标的密码
+		MySQL退出
+			1. exit
+			2. quit
+	
+		MySQL目录结构
+			1. MySQL安装目录: basedir="D:/develop/MySQL/"
+				配置文件 my.ini
+			2. MySQL数据目录: datadir="C:/ProgramData/MySQL/MySQL Server 5.5/Data/"
+				几个概念
+					数据库: 文件夹
+					#表: 文件
+					数据: 数据
+
+---------------------------------------------------------------------------------------------------  
+3.SQL
+	1.什么是SQL
+		1. Structured Query Language : 结构化查询语言
+		2. 其实就是定义了操作所有关系型数据库的规则
+        3. 每一种数据库操作的方式存在不一样的地方，称为“方言”
+		
+	2.SQL通用语法
+		1. SQL 语句可以单行或多行书写，以分号结尾。
+		2. 可使用空格和缩进来增强语句的可读性。
+		3. MySQL 数据库的 SQL 语句不区分大小写，关键字建议使用大写。
+		4. 3种注释
+			单行注释: -- 注释内容 或 # 注释内容(mysql 特有) 
+			多行注释: /注释 */
+		
+	3. SQL分类
+		1) DDL(Data Definition Language)数据定义语言
+			用来定义数据库对象: 数据库，表，列等。关键字: create, drop,alter 等
+
+		2) DML(Data Manipulation Language)数据操作语言
+			用来对数据库中表的数据进行增删改。关键字: insert, delete, update 等
+
+		3) DQL(Data Query Language)数据查询语言
+			用来查询数据库中表的记录(数据)。关键字: select, where 等
+
+		4) DCL(Data Control Language)数据控制语言(了解)
+			用来定义数据库的访问权限和安全级别，及创建用户。关键字: GRANT， REVOKE 等
+
+--------------------------------------------------------------------------------------------------- 
+4.数据库的列类型
+	1.数值
+		1. tinyint		1个字节		十分小的数据
+		2. smallint		-2个字节	 较小的数据
+		3. mediumint	 3个字节	 中等大小的数据
+		4. int		  4个字节	  标准的整数
+		5. bigint	   -8个字节	    较大的数据
+		6. float	   4个字节	   浮点数
+		7. double	   -8个字节		浮点数
+		8. decimal				-字符串形式的浮点数，金融计算的时候一般使用decimal
+
+	2.字符串
+		1. char			字符串的固定大小	0-255
+		2. varchar		 -可变字符串	   0-65535
+		3. tinytext		  微型文本		  2^8-1
+		4. text			文本串		   2^16-1
+
+	3.时间日期
+		1. data			yyyy-mm-dd			日期格式
+		2. time			hh:mm:ss	   	   时间格式
+		3. datatime		  yyyy-mm-dd hh:mm:ss	  最常用的时间格式    
+		4. timestamp	  -时间戳			 1970.1.1到现在的毫秒数
+		5. year						   年份表示	
+
+	4.NULL
+		1. 没有值，未知
+		2. 不要使用 null 进行运算，都结果为null
+
+--------------------------------------------------------------------------------------------------- 
+5.数据库的字段属性
+	1.代码示例
+		CREATE TABLE IF NOT EXISTS `student`(
+			`id` INT(4) NOT NULL AUTO_INCREMENT COMMENT '学号',
+			`name` VARCHAR(30) NOT NULL DEFAULT '匿名' COMMENT '姓名',
+			`pwd` VARCHAR(20)  NOT NULL DEFAULT '123456' COMMENT '密码',
+			`sex` VARCHAR(2) NOT NULL DEFAULT '女' COMMENT '性别',
+			`birthday` DATETIME DEFAULT NULL COMMENT '出生日期',
+			`address` VARCHAR(100) DEFAULT NULL COMMENT '地址',
+			`emali` VARCHAR(50) DEFAULT NULL UNSIGNED COMMENT  '邮箱',
+			PRIMARY KEY(`id`)
+		)ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+	2.Unsigned 	UNSIGNED
+		无符号的整数，表示该列不能成为负数 NOT NULL
+
+	3.zerofill	ZEROFILL
+		不足的位数，使用0来填充
+
+	4.自增	AUTO_INCREMENT
+		1. 通常理解为自增，自动在自动在上一条记录的基础上 +1 (默认)
+		2. 通常用来设计唯一的主键 index ,必须是整数类型
+		3. 可以自定义设计主键自增的起始值与步长
+		4. AUTO_INCREMENT
+
+	5.非空 NOT NULL/NULL
+		1. nut null 如果不给赋值，就会报错
+		2. NULL 如果不填写值，默认就是null
+		3. NOT NULL
+
+	6.默认	DEFAULT '匿名'
+		设置默认值
+
+	7.注释	COMMENT '学号'
+		
+
+	8.引擎	ENGINE = INNODB
+	
+	9.字符集 	DEFAULT CHARSET = utf8
+		mysql默认的字符集不支持中文，需要修改
+
+--------------------------------------------------------------------------------------------------- 
+6.数据库引擎
+	INNODB	默认使用
+	MYISAM	早些年使用的
+
+				MYISAM		INNODB
+	事务支持		 /		   Y8
+	数据行锁定		  /		    Y
+	外键约束		 /		   Y
+	全文索引		 Y		   /
+	表空间大小		 较小		较大，约两倍
+
+	MYISAM 节约空间，速度较快
+	INNODB 安全性高，事务的处理，多表用户操作
+	
+--------------------------------------------------------------------------------------------------- 
+7.外键
+	1.代码示例
+		ALTER TABLE `student`
+		ADD CONSTRAINT `FK_gradeid` FOREIGN KEY(`gradeid`) REFERENCES `grade` (`gradeid`);
+
+	2.代码解析
+		ALTER TABLE 表名 
+		ADD CONSTRAINT 约束名 FOREIGN KEY (`作为外键的列`) REFERENCES `哪个表` (`哪个字段`)
+
+	3.注意事项
+		以上操作都是物理外键，数据库级别的外键，我们不建议使用 (避免数据库过多造成困扰)
+
+	4.最佳方法
+		1.数据库就是单纯的表，只用来存数据，只有行(数据)和列(字段)
+		2.我们想使用多张表的数据，想使用外键，就通过程序去实现
+
+--------------------------------------------------------------------------------------------------- 
+8.DDL: 操作数据库、表
+	1.操作数据库: CRUD
+		1.C(Create):创建
+			1.创建数据库
+				create database 数据库名称;
+
+			2.创建数据库，判断不存在，再创建
+				create database if not exists 数据库名称;
+
+			3.创建数据库，并指定字符集
+				create database 数据库名称 character set 字符集名;
+
+		2.R(Retrieve): 查询
+			1.查询所有数据库的名称
+				show databases;
+
+			2.查询某个数据库信息，包括字符集和创建语句
+				show create database 数据库名称;
+
+		3.U(Update):修改
+			1.修改数据库的字符集
+				alter database 数据库名称 character set 字符集名称;
+
+		4.D(Delete):删除
+			1.删除数据库
+				drop database 数据库名称;
+			2.判断数据库存在，存在再删除
+				drop database if exists 数据库名称;
+
+		5.使用数据库
+			1.查询当前正在使用的数据库名称
+				select database();
+			
+			2.使用数据库
+				use 数据库名称;
+
+
+	2.操作表: CRUD
+		1.C(Create):创建
+			1.语法: 
+				create table 表名(
+					列名1 数据类型1,
+					列名2 数据类型2,
+					....
+					列名n 数据类型n
+				);
+
+			2.代码示例
+				create table student(
+					id int,
+					name varchar(32),
+					age int ,
+					score double(4,1),
+					birthday date,
+					insert_time timestamp
+				);
+
+			3.数据库类型: 
+				1. int: 整数类型
+					age int,
+
+				2. double:小数类型
+					score double(5,2)
+					一共有5位，小数位最大有2位
+
+				3. date:日期，只包含年月日，yyyy-MM-dd
+
+				4. datetime:日期，包含年月日时分秒	 yyyy-MM-dd HH:mm:ss
+				
+				5. timestamp:时间错类型	包含年月日时分秒	 yyyy-MM-dd HH:mm:ss	
+					如果将来不给这个字段赋值，或赋值为null，则默认使用当前的系统时间，来自动赋值
+
+				6. varchar: 字符串
+					name varchar(20):姓名最大20个字符
+					zhangsan 8个字符  张三 2个字符
+			
+			4.复制表: 
+				create table 表名 like 被复制的表名;
+
+		2.R(Retrieve): 查询
+			1.查询某个数据库中所有的表名称
+				show tables;
+
+			2.查询表结构
+				desc 表名;
+
+			3.查询某个表的信息
+				show create table 表名;
+
+		3. U(Update):修改
+			1. 修改表名
+				alter table 表名 rename to 新的表名;
+
+			2. 修改表的字符集
+				alter table 表名 character set 字符集名称;
+
+			3. 添加一列
+				alter table 表名 add 列名 数据类型;
+
+			4. 修改列名称/类型
+				alter table 表名 change 列名 新列别 新数据类型;
+				alter table 表名 modify 列名 新数据类型;
+
+			5. 删除列
+				alter table 表名 drop 列名;
+
+		4. D(Delete):删除	
+			1.删除表
+				drop table 表名;
+			
+			2.判断表是否存在，存在再删除
+				drop table  if exists 表名 ;
+
+--------------------------------------------------------------------------------------------------- 
+9.DML: 增删改表中数据
+	1. 添加数据
+		1.语法
+			insert into 表名(列名1,列名2,...列名n) 
+			values(值1,值2,...值n);
+
+		2.示例
+			INSERT INTO stu(id, NAME) 
+			VALUES(1, "提莫");
+
+		3.注意
+			1. 列名和值要一一对应。
+			2. 如果表名后，不定义列名，则默认给所有列添加值
+				insert into 表名 values(值1,值2,...值n);
+			3. 除了数字类型，其他类型需要使用引号(单双都可以)引起来
+
+	2. 删除数据：
+		1.语法
+			delete from 表名 
+			[where 条件];
+
+		2.示例
+			DELETE FROM stu 
+			WHERE id = 1;
+
+		3.注意
+			1. 如果不加条件，则删除表中所有记录。
+			2. 如果要删除所有记录
+				1. delete from 表名; -- 不推荐使用。有多少条记录就会执行多少次删除操作
+				2. TRUNCATE table 表名; -- 推荐使用，效率更高 先删除表，然后再创建一张一样的表, 清空表
+
+		4.DELETE 和 TRUNCATE 的区别
+			1.TRUNCATE 会重新设置 自增列 计数器会归零
+			2.TRUNCATE 不会影响事物
+
+
+	3. 修改数据：
+		1.语法
+			update 表名 
+			set 列名1 = 值1, 列名2 = 值2,... 
+			[where 条件];
+
+		2.示例
+			UPDATE stu 
+			SET	id = 1,	NAME = "提莫", AGE = 18 
+			WHERE id = 2; 
+
+		3.如果不加任何条件，则会将表中所有记录全部修改 (极其危险的操作)
+
+	4.where操作符列表
+		=				等于
+		<>/!=			  不等于
+		>				大于
+		<				小于
+		<=				-小于等于
+		>=				-大于等于
+		BETWEEN 2 AND 5		 -[2,5]
+		AND/&&			  -且 
+		OR/||			  或 
+		NOT/!			  非
+
+--------------------------------------------------------------------------------------------------- 
+DQL：查询表中的记录
+	select * from 表名;
+	
+	1. 语法：
+		select
+			字段列表
+		from
+			表名列表
+		where
+			条件列表
+		group by
+			分组字段
+		having
+			分组之后的条件
+		order by
+			排序
+		limit
+			分页限定
+
+
+	2. 基础查询
+		1. 多个字段的查询
+			1.示例
+				SELECT 
+					`id` AS 学号,
+					`name` AS 姓名,
+					`age` AS 姓名,
+					`attack` AS 攻击力
+				FROM
+					hero AS 英雄;
+			
+			2.代码解析
+				AS	起别名，可以给字段和表起别名
+				 
+		2.CONCAT(a, b)函数
+			1.代码示例
+				SELECT
+					CONCAT('姓名: ',`name`) AS 新名字 
+				FROM 
+					hero;
+
+			2.代码解析
+				CONCAT(a, b)，将 a 插入到字段 b 前面
+				不会改变原字段的名称，只会在显示的时候改变
+
+		2. 去除重复：
+			1.使用 distinct 去除重复，只显示不重复的成分
+
+			2.示例
+				SELECT DISTINCT
+					`name`
+				FROM
+					hero;
+
+		3. 计算列
+			1.所有数据加 1
+				SELECT 
+					`attack`+ 1 AS '提升攻击'
+				FROM
+					hero;
+
+			2.四则计算
+				SELECT 100*3-41 AS 计算结果;
+		
+		4.SELECT其他用法
+			1. SELECT VERSION();			查询系统版本
+			2. SELECT @@auto_increment_increment    查询自增步长
+			
+
+	3. 条件查询
+		1.逻辑查询
+			SELECT 
+				`id`,
+				`name`,
+				`age`,
+				`attack`
+			FROM 
+				`hero`
+			WHERE
+				`attack` > 10
+				AND `age` > 20;
+
+		2.模糊查询
+			1. IS NULL/IS NOT NULL
+				1.说明
+					条件判断，判断字段是否为NULL
+				2.示例
+					WHERE `name` IS NOT NULL;
+		
+			2. BETWEEN a AND b
+				1.说明
+					字段的值介于 a、b 之间
+				2.示例
+					WHERE `age` BETWEEN 20 AND 30
+
+			3. LIKE
+				1.占位符
+					* _:单个任意字符
+					* %：多个任意字符
+				2.示例
+					WHERE NAME LIKE '马%'	   -查询姓马的有哪些
+					WHERE NAME LIKE "_化%"	 	查询姓名第二个字是化的人
+					WHERE NAME LIKE '___'	   -查询姓名是3个字的人
+					WHERE NAME LIKE '%德%'		查询姓名中包含德的人
+				
+
+			4. IN
+				1.示例
+					WHERE id IN (3,4,5)
+				2.说明
+					查询 id 在 (集合) 中的数据
+
+	4.联表查询
+		1.表格
+			INNER JOIN			如果表中至少有一个匹配，就返回行 
+			RIGHT JOIN			会从右表中返回所有的值，即使左表中没有匹配
+			LEFT JOIN		   -会从左表中返回所有的值，即使右表中没有匹配
+
+		2.示例
+			SELECT hero.id, NAME, attack, hp
+			FROM hero AS hero
+			INNER JOIN herohp AS hp
+			ON hero.`id` = hp.id;
+
+		3.代码解析
+			1.AS	取别名，可以通过 别名.列名 来确定要查询的值
+			2.ON	JOIN 与 ON 匹配，用 WHERE 也可以代替
+			
+
+--------------------------------------------------------------------------------------------------- 
+
+
+
+
+

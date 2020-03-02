@@ -1,0 +1,263 @@
+
+cd ..						
+返回上一目录
+	
+cd ~						
+进入用户文件夹
+	
+cat readme.txt				
+查看文件信息
+	
+mkdir WeChat				
+创建空文件夹
+	
+git init					
+初始化git仓库
+
+git add readme.txt			
+跟踪文件
+
+git status					
+查看状态报告
+
+git status -s				
+简化状态报告
+
+git diff --cached			
+显示已暂存文件的改动
+
+git diff he.txt				
+和暂存区的版本进行比较
+
+git diff HEAD he.txt		
+和本地库的文件进行比较
+
+git diff HEAD^ aaa.txt		
+和本地库上一个版本的文件进行比较
+
+git commit file				
+提交已暂存文件，并且编辑注释
+
+git commit -m "..."	file
+提交已暂存文件，在命令行直接添加注释
+
+git commit -a	  			
+提交已修改文件，并且编辑注释
+
+rm readme.txt				
+直接在磁盘中删除readme.txt文件
+
+git rm readme.txt
+将文件从暂存区和磁盘中删除（文件未修改）
+			
+git rm readme.txt -f		
+将文件从暂存区和磁盘中删除（文件已修改）			
+
+touch new.txt 				
+直接在当前目录新建一个文件
+
+vi rdeadme.txt				
+新建一个文件并进入编辑状态（如果文件已存在，则直接进入编辑状态）
+
+vim下 :q 					
+未编辑退出，否则报错
+
+vim下 :q! 					
+退出不保存
+
+vim下 :x 					
+保存并退出
+
+vim下 :wq 					
+保存并退出	
+
+git mv hello.txt he.txt		
+重命名
+
+git log						
+查看项目提交历史
+
+git log -p					
+显示每次提交的内容差异
+
+git log -stat				
+每次提交的简略的统计信息
+
+git log --pretty=oneline	
+每个提交放在一行显示
+
+git log --oneline			
+简写哈希值，放在一行，只显示后面的版本
+
+git log --since=2.weeks		
+显示2周内的提示
+
+git reflog					
+一行简写，对于移动指针有很好的参考价值
+
+git reset HEAD he.txt		
+将文件移出暂存区
+
+git checkout -- he.txt 		
+将已修改的文件恢复至未修改
+
+vim good.txt				
+新建并修改文件
+
+git reset --hard 84ce030	
+回到索引值84ce030的位置
+
+git reset --hard HEAD^		
+后退一个版本，只能后退（几个^就后退几个版本）
+
+git reset --hard HEAD~3		
+后退三个版本，只能后退
+
+git reset --hard HEAD		
+回到head的位置
+
+ctrl + l					
+清屏
+
+git branch -v
+显示分支
+
+git branch hot_fix
+新建一个hot_fix分支
+
+git checkout hot_fix
+切换到hot_fix分支
+
+git merge hot_fix
+将hot_fix分支的内容合并的当前分支上
+
+ll			
+显示目录信息
+
+ls -a			
+显示隐藏目录信息
+
+cd 目录		
+转到指定目录
+
+pwd			
+显示当前文件的路径
+
+git config user.name TonyDon
+设置项目级别签名
+
+git config user.email 1400615611@qq.com
+设置项目级别邮箱
+
+git config --global user.name tang_glb
+设置系统用户级别签名
+
+git config --gloaal  1400615611@qq.com
+设置系统用户级别邮箱
+
+git remote add address1 https://github.com/13102058011/huashan.git
+给地址取别名
+
+git remote -v
+查看地址信息
+
+git push address1 master
+把master分支推送到address1地址上，需要登陆账号密码（必须是基于最新版的修改）
+
+git clone https://github.com/13102058011/huashan.git
+把远程库克隆到本地，完整克隆，初始化本地库，创建地址名
+
+git fetch address1 master
+将远程库中的master分支下载下来，不会对本地库做出修改
+
+git checkout address1/master                                 
+将指针指向远程库的分支
+
+git pull address1 master
+将远程库的master分支与本地库合并（若有冲突则j）
+
+git branch -d dev
+删除分支dev
+
+git push origin --delete 分支名称
+删除远程分支
+
+git checkout -b dev
+创建并切换到分支dev
+
+git branch
+查看当前分支
+
+git switch -c dev
+创建并切换到新的dev分支
+
+git switch master
+切换到master分支
+
+git log --graph --pretty=oneline --abbrev-commit
+查看分支的合并情况
+
+git merge --no-ff -m "merge with no-ff" dev
+使用普通模式进行合并，可以看到合并历史
+
+git status
+把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+
+git stash apply
+将工作区恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除
+
+git stash pop
+恢复的同时把stash内容也删了
+
+git checkout -b dev origin/dev
+从远程库把dev分支克隆下来
+
+git checkout -b dev origin/dev
+根据提示，设置dev和origin/dev的链接
+
+git tag v1.0
+在当前分支设置标签
+
+git tag
+查看所有标签
+
+git tag -a v0.1 -m "version 0.1 released" 1094adb
+还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字
+
+git tag -d v0.1
+删除标签
+
+git push origin --tags
+一次性推送全部尚未推送到远程的本地标签：
+
+git push origin v1.0
+推送某个标签到远程库
+
+git push origin :refs/tags/v0.9
+删除远程库的标签
+
+git config --global alias.st status
+define
+
+git config --global alias.unstage 'reset HEAD'
+偷懒必备
+
+每个仓库的Git配置文件都放在.git/config文件中：
+而当前用户的Git配置文件放在用户主目录下的一个隐藏文件.gitconfig中
+删除就直接配置文件里的内容删除即可
+
+f0aa21b
+
+
+
+
+checkout
+branch
+merge
+conflict
+conclude
+vulcan
+
+
+
+
