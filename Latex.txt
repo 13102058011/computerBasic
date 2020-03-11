@@ -1,0 +1,99 @@
+1.示例
+	%导言区
+	\documentclass{article}
+
+	\usepackage{ctex}
+	\newcommand\degree{^\circ}
+
+	\title{老唐}
+	\author{TonyDon}
+	\date{\today}
+
+	%正文区
+	\begin{document}
+		\maketitle
+		Hello World
+		
+		Let $f(x)$ be defined by the formula
+		
+		$\angle C = 90\degree$
+		\begin{equation}
+			f(x) = 3x^2+5
+		\end{equation}
+		Good
+	\end{document}
+
+2.代码解析
+	1.定义新命令
+		\newcommand\degree{^\circ}
+
+	2.公式末尾有标号
+		\begin{equation}
+			f(x) = 3x^2+5
+		\end{equation}
+
+	3.定义文章类型
+		\documentclass{article}
+
+	4.标题, 作者, 时间
+		\title{老唐}
+		\author{TonyDon}
+		\date{\today}
+	
+	5.显示标题
+		\maketitle
+
+	6.行内数学公式
+		$f(x)$
+	
+	7.行外数学公式
+	   $$f(x) = 3x^2+5$$ 
+
+	8.导包
+		\usepackage{ctex}
+
+
+基础知识
+	1. 命令都是以 \ 开头
+	2. 以 % 开头为注释
+	3. 用 $f(x)$ 括起来的为行内数学模式
+	4. $$f(x) = 3x^2+5$$ 表示行外数学公式
+	5. 空一行表示换行
+
+基础命令
+	1. \usepackage{}        为包, 自己引入包
+	2. \newpage          -下一页
+	3. \thispagestyle{empty}    去掉本页页码
+	4. \tableofcontents      -生成目录
+	5. \listoffigures       -人物表格
+	6. \listoftables        表目录
+	7. \pagenumbering{Roman}    罗马数字页码
+	8. \pagenumbering{arabic}   -阿拉伯数字页码
+	9. \input{part/patr1}     -导入文件(相对目录)
+
+分章节
+	\section{}      
+	\subsection{}
+	\subsubsection{}
+
+段落(用的少)
+	\paragraph
+
+字体族设置
+	1.花括号内字体设置
+		\textrm{罗马字体}
+		\textsf{无衬线字体}
+		\texttt{打字机字体}
+
+	2.设置后续内容字体
+		
+
+
+
+
+
+
+
+
+
+
